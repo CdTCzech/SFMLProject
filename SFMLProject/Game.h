@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
@@ -25,7 +25,8 @@ private:
 	static const sf::Time	TimePerFrame;
 
 	sf::RenderWindow	m_window;
-	sf::CircleShape		m_player;
+	sf::Texture			m_texture;
+	sf::Sprite			m_player;
 	sf::Font			m_font;
 	sf::Text			m_statisticsText;
 	sf::Time			m_statisticsUpdateTime;

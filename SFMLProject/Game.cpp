@@ -8,6 +8,7 @@ const sf::Time	Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
 	: m_window(sf::VideoMode(640, 480), "SFMLProject", sf::Style::Close)
+	, m_texture()
 	, m_player()
 	, m_font()
 	, m_statisticsText()
@@ -15,9 +16,14 @@ Game::Game()
 	, m_statisticsNumFrames(0)
 	, m_playerDown(false), m_playerLeft(false), m_playerRight(false), m_playerUp(false)
 {
-	m_player.setRadius(40.f);
+
+	if (!m_texture.loadFromFile("Resources/Textures/BibleThumpReverse.png"))
+	{
+		// Handle loading error
+	}
+
+	m_player.setTexture(m_texture);
 	m_player.setPosition(100.f, 100.f);
-	m_player.setFillColor(sf::Color::Green);
 
 	m_font.loadFromFile("Resources/Fonts/Sansation.ttf");
 	m_statisticsText.setFont(m_font);
