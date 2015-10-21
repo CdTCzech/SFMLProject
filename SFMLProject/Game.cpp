@@ -9,11 +9,20 @@ const sf::Time	Game::TimePerFrame = sf::seconds(1.f / 60.f);
 Game::Game()
 	: m_window(sf::VideoMode(640, 480), "SFMLProject", sf::Style::Close)
 	, m_player()
+	, m_font()
+	, m_statisticsText()
+	, m_statisticsUpdateTime()
+	, m_statisticsNumFrames(0)
 	, m_playerDown(false), m_playerLeft(false), m_playerRight(false), m_playerUp(false)
 {
 	m_player.setRadius(40.f);
 	m_player.setPosition(100.f, 100.f);
 	m_player.setFillColor(sf::Color::Green);
+
+	m_font.loadFromFile("Resources/Fonts/Sansation.ttf");
+	m_statisticsText.setFont(m_font);
+	m_statisticsText.setPosition(5.f, 5.f);
+	m_statisticsText.setCharacterSize(10);
 }
 
 void Game::run()
@@ -22,13 +31,15 @@ void Game::run()
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (m_window.isOpen())
 	{
-		timeSinceLastUpdate += clock.restart();
+		sf::Time elapsedTime = clock.restart();
+		timeSinceLastUpdate += elapsedTime;
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
 			processEvents();
 			update(TimePerFrame);
 		}
+		updateStatistics(elapsedTime);
 		render();
 	}
 }
@@ -82,6 +93,7 @@ void Game::render()
 {
 	m_window.clear();
 	m_window.draw(m_player);
+	m_window.draw(m_statisticsText);
 	m_window.display();
 }
 
@@ -103,5 +115,22 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 		break;
 	default:
 		break;
+	}
+}
+
+void Game::updateStatistics(sf::Time elapsedTime)
+{
+	m_statisticsUpdateTime += elapsedTime;
+	m_statisticsNumFrames += 1;
+
+	if (m_statisticsUpdateTime >= sf::seconds(1.0f))
+	{
+		m_statisticsText.setString(
+			"Frames / Second: " + std::to_string(m_statisticsNumFrames) + "\n" +
+			"Time / Update: " + std::to_string(m_statisticsUpdateTime.asMicroseconds() / m_statisticsNumFrames) + "us"
+		);
+
+		m_statisticsUpdateTime -= sf::seconds(1.0f);
+		m_statisticsNumFrames = 0;
 	}
 }
