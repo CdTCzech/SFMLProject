@@ -3,8 +3,11 @@
 #include <SFML/Window/Event.hpp>
 
 
+const float		Game::PlayerSpeed = 100.f;
+const sf::Time	Game::TimePerFrame = sf::seconds(1.f / 60.f);
+
 Game::Game()
-	: m_window(sf::VideoMode(640, 480), "SFMLProject")
+	: m_window(sf::VideoMode(640, 480), "SFMLProject", sf::Style::Close)
 	, m_player()
 	, m_playerDown(false), m_playerLeft(false), m_playerRight(false), m_playerUp(false)
 {
@@ -15,10 +18,17 @@ Game::Game()
 
 void Game::run()
 {
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (m_window.isOpen())
 	{
-		processEvents();
-		update();
+		timeSinceLastUpdate += clock.restart();
+		while (timeSinceLastUpdate > TimePerFrame)
+		{
+			timeSinceLastUpdate -= TimePerFrame;
+			processEvents();
+			update(TimePerFrame);
+		}
 		render();
 	}
 }
@@ -45,27 +55,27 @@ void Game::processEvents()
 	}
 }
 
-void Game::update()
+void Game::update(sf::Time deltaTime)
 {
 	sf::Vector2f movement(0.f, 0.f);
 	if (m_playerDown)
 	{
-		movement.y += 1.f;
+		movement.y += PlayerSpeed;
 	}
 	if (m_playerLeft)
 	{
-		movement.x -= 1.f;
+		movement.x -= PlayerSpeed;
 	}
 	if (m_playerRight)
 	{
-		movement.x += 1.f;
+		movement.x += PlayerSpeed;
 	}
 	if (m_playerUp)
 	{
-		movement.y -= 1.f;
+		movement.y -= PlayerSpeed;
 	}
 
-	m_player.move(movement);
+	m_player.move(movement * deltaTime.asSeconds());
 }
 
 void Game::render()
