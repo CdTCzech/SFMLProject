@@ -125,16 +125,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\SceneNode.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Utilities\ResourceHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Entity.hpp" />
+    <ClInclude Include="Entities\Player.hpp" />
     <ClInclude Include="Entities\SceneNode.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Utilities\ResourceHolder.hpp" />
+    <ClInclude Include="Utilities\ResourceIdentifiers.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
