@@ -124,11 +124,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entities\Entity.cpp" />
+    <ClCompile Include="Entities\SceneNode.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Utilities\ResourceHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entities\Entity.hpp" />
+    <ClInclude Include="Entities\SceneNode.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Utilities\ResourceHolder.hpp" />
   </ItemGroup>
