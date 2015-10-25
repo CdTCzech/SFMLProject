@@ -27,22 +27,22 @@ SceneNode::SceneNodePtr SceneNode::detachChild(const SceneNode& node)
 	return result;
 }
 
-void SceneNode::update(sf::Time dt)
+void SceneNode::update(sf::Time deltaTime)
 {
-	updateCurrent(dt);
-	updateChildren(dt);
+	updateCurrent(deltaTime);
+	updateChildren(deltaTime);
 }
 
-void SceneNode::updateCurrent(sf::Time)
+void SceneNode::updateCurrent(sf::Time /*deltaTime*/)
 {
 	// Do nothing by default
 }
 
-void SceneNode::updateChildren(sf::Time dt)
+void SceneNode::updateChildren(sf::Time deltaTime)
 {
 	for (SceneNodePtr& child :m_children)
 	{
-		child->update(dt);
+		child->update(deltaTime);
 	}
 }
 

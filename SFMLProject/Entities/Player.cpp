@@ -1,8 +1,9 @@
 #include "Player.hpp"
-#include "../Utilities/ResourceHolder.hpp"
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+
+#include "../Utilities/ResourceHolder.hpp"
 
 
 Textures::ID toTextureID(Player::Type type)

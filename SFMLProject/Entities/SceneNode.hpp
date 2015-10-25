@@ -1,12 +1,12 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
-
-#include <memory>
-#include <vector>
 
 
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
@@ -20,14 +20,14 @@ public:
 	void			attachChild(SceneNodePtr child);
 	SceneNodePtr	detachChild(const SceneNode& node);
 
-	void			update(sf::Time dt);
+	void			update(sf::Time deltaTime);
 
 	sf::Vector2f	getWorldPosition() const;
 	sf::Transform	getWorldTransform() const;
 
 private:
-	virtual void	updateCurrent(sf::Time dt);
-	void			updateChildren(sf::Time dt);
+	virtual void	updateCurrent(sf::Time deltaTime);
+	void			updateChildren(sf::Time deltaTime);
 
 	virtual void	draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;

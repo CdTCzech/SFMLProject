@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Entity.hpp"
-#include "../Utilities/ResourceIdentifiers.hpp"
-
 #include <SFML/Graphics/Sprite.hpp>
+
+#include "../Utilities/ResourceIdentifiers.hpp"
+#include "Entity.hpp"
 
 
 class Player : public Entity

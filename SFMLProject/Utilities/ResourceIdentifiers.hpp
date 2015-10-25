@@ -10,6 +10,7 @@ namespace Textures
 {
 	enum class ID
 	{
+		Background,
 		BibleThumpReverse,
 	};
 }

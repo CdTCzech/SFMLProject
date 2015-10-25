@@ -3,32 +3,20 @@
 #include <SFML/Window/Event.hpp>
 
 
-const float		Game::PlayerSpeed = 100.f;
 const sf::Time	Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
 	: m_window(sf::VideoMode(640, 480), "SFMLProject", sf::Style::Close)
-	, m_texture()
-	, m_player()
+	, m_world(m_window)
 	, m_font()
 	, m_statisticsText()
 	, m_statisticsUpdateTime()
 	, m_statisticsNumFrames(0)
-	, m_playerDown(false), m_playerLeft(false), m_playerRight(false), m_playerUp(false)
 {
-
-	if (!m_texture.loadFromFile("Resources/Textures/BibleThumpReverse.png"))
-	{
-		// Handle loading error
-	}
-
-	m_player.setTexture(m_texture);
-	m_player.setPosition(100.f, 100.f);
-
 	m_font.loadFromFile("Resources/Fonts/Sansation.ttf");
 	m_statisticsText.setFont(m_font);
 	m_statisticsText.setPosition(5.f, 5.f);
-	m_statisticsText.setCharacterSize(10);
+	m_statisticsText.setCharacterSize(12);
 }
 
 void Game::run()
@@ -74,54 +62,18 @@ void Game::processEvents()
 
 void Game::update(sf::Time deltaTime)
 {
-	sf::Vector2f movement(0.f, 0.f);
-	if (m_playerDown)
-	{
-		movement.y += PlayerSpeed;
-	}
-	if (m_playerLeft)
-	{
-		movement.x -= PlayerSpeed;
-	}
-	if (m_playerRight)
-	{
-		movement.x += PlayerSpeed;
-	}
-	if (m_playerUp)
-	{
-		movement.y -= PlayerSpeed;
-	}
-
-	m_player.move(movement * deltaTime.asSeconds());
+	m_world.update(deltaTime);
 }
 
 void Game::render()
 {
 	m_window.clear();
-	m_window.draw(m_player);
+
+	m_world.draw();
+
+	m_window.setView(m_window.getDefaultView());
 	m_window.draw(m_statisticsText);
 	m_window.display();
-}
-
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-	switch (key)
-	{
-	case sf::Keyboard::A:
-		m_playerLeft = isPressed;
-		break;
-	case sf::Keyboard::D:
-		m_playerRight = isPressed;
-		break;
-	case sf::Keyboard::S:
-		m_playerDown = isPressed;
-		break;
-	case sf::Keyboard::W:
-		m_playerUp = isPressed;
-		break;
-	default:
-		break;
-	}
 }
 
 void Game::updateStatistics(sf::Time elapsedTime)
@@ -139,4 +91,8 @@ void Game::updateStatistics(sf::Time elapsedTime)
 		m_statisticsUpdateTime -= sf::seconds(1.0f);
 		m_statisticsNumFrames = 0;
 	}
+}
+
+void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
+{
 }

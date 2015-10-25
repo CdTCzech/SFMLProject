@@ -45,6 +45,9 @@
     <ClCompile Include="Entities\SpriteNode.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities\ResourceHolder.hpp">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Entities\SpriteNode.hpp">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,10 +6,10 @@ void Entity::setVelocity(sf::Vector2f velocity)
 	m_velocity = velocity;
 }
 
-void Entity::setVelocity(float vx, float vy)
+void Entity::setVelocity(float x, float y)
 {
-	m_velocity.x = vx;
-	m_velocity.y = vy;
+	m_velocity.x = x;
+	m_velocity.y = y;
 }
 
 sf::Vector2f Entity::getVelocity() const
@@ -17,7 +17,7 @@ sf::Vector2f Entity::getVelocity() const
 	return m_velocity;
 }
 
-void Entity::updateCurrent(sf::Time dt)
+void Entity::updateCurrent(sf::Time deltaTime)
 {
-	move(m_velocity * dt.asSeconds());
+	move(m_velocity * deltaTime.asSeconds());
 }

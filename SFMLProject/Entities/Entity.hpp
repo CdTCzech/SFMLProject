@@ -11,7 +11,7 @@ public:
 	sf::Vector2f	getVelocity() const;
 
 private:
-	virtual void	updateCurrent(sf::Time dt) override;
+	virtual void	updateCurrent(sf::Time deltaTime) override;
 
 private:
 	sf::Vector2f	m_velocity;
