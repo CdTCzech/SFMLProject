@@ -127,6 +127,7 @@
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="Entities\Player.cpp" />
     <ClCompile Include="Entities\SceneNode.cpp" />
+    <ClCompile Include="Entities\SpriteNode.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="Entities\Entity.hpp" />
     <ClInclude Include="Entities\Player.hpp" />
     <ClInclude Include="Entities\SceneNode.hpp" />
+    <ClInclude Include="Entities\SpriteNode.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Utilities\ResourceHolder.hpp" />
     <ClInclude Include="Utilities\ResourceIdentifiers.hpp" />
