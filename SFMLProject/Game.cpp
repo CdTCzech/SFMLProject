@@ -8,11 +8,14 @@ const sf::Time	Game::TimePerFrame = sf::seconds(1.f / 60.f);
 Game::Game()
 	: m_window(sf::VideoMode(640, 480), "SFMLProject", sf::Style::Close)
 	, m_world(m_window)
+	, m_player()
 	, m_font()
 	, m_statisticsText()
 	, m_statisticsUpdateTime()
 	, m_statisticsNumFrames(0)
 {
+	m_window.setKeyRepeatEnabled(false);
+
 	m_font.loadFromFile("Resources/Fonts/Sansation.ttf");
 	m_statisticsText.setFont(m_font);
 	m_statisticsText.setPosition(5.f, 5.f);
@@ -30,7 +33,7 @@ void Game::run()
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
-			processEvents();
+			processInput();
 			update(TimePerFrame);
 		}
 		updateStatistics(elapsedTime);
@@ -38,26 +41,22 @@ void Game::run()
 	}
 }
 
-void Game::processEvents()
+void Game::processInput()
 {
+	CommandQueue& commands = m_world.getCommandQueue();
+
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
-		switch (event.type)
+		m_player.handleEvent(event, commands);
+
+		if (event.type == sf::Event::Closed)
 		{
-		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
-		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
-		case sf::Event::Closed:
 			m_window.close();
-			break;
-		default:
-			break;
 		}
 	}
+
+	m_player.handleRealtimeInput(commands);
 }
 
 void Game::update(sf::Time deltaTime)
@@ -91,8 +90,4 @@ void Game::updateStatistics(sf::Time elapsedTime)
 		m_statisticsUpdateTime -= sf::seconds(1.0f);
 		m_statisticsNumFrames = 0;
 	}
-}
-
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
 }

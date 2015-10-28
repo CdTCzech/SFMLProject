@@ -9,6 +9,8 @@
 #include <SFML/System/Time.hpp>
 
 
+struct Command;
+
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
@@ -17,13 +19,17 @@ public:
 public:
 	SceneNode();
 
-	void			attachChild(SceneNodePtr child);
-	SceneNodePtr	detachChild(const SceneNode& node);
+	void					attachChild(SceneNodePtr child);
+	SceneNodePtr			detachChild(const SceneNode& node);
 
-	void			update(sf::Time deltaTime);
+	void					update(sf::Time deltaTime);
 
-	sf::Vector2f	getWorldPosition() const;
-	sf::Transform	getWorldTransform() const;
+	sf::Vector2f			getWorldPosition() const;
+	sf::Transform			getWorldTransform() const;
+
+	void					onCommand(const Command& command, sf::Time deltaTime);
+	virtual unsigned int	getCategory() const;
+
 
 private:
 	virtual void	updateCurrent(sf::Time deltaTime);

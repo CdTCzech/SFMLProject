@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{6ce7ce0c-e818-4eda-b6d3-fba40c2a51a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{ecc681db-72f7-44eb-98a1-a208a3fe406b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{3bb1d47b-5270-4531-88ed-748e07d94971}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -39,14 +45,23 @@
     <ClCompile Include="Entities\SceneNode.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\Player.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\SpriteNode.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\PlayerEntity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Command.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\CommandQueue.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\PlayerInput.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +77,6 @@
     <ClInclude Include="Entities\SceneNode.hpp">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\Player.hpp">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\ResourceIdentifiers.hpp">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
@@ -73,6 +85,21 @@
     </ClInclude>
     <ClInclude Include="World.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\PlayerEntity.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Command.hpp">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Category.hpp">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\CommandQueue.hpp">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\PlayerInput.hpp">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

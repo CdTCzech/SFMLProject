@@ -13,7 +13,7 @@ World::World(sf::RenderWindow& window)
 	, m_sceneGraph()
 	, m_sceneLayers()
 	, m_worldBounds(0.f, 0.f, 2000.f, 2000.f)
-	, m_spawnPosition(m_worldView.getSize().x / 2.f, m_worldView.getSize().y / 2.f)
+	, m_spawnPosition(m_worldBounds.width / 2.f, m_worldBounds.height / 2.f)
 	, m_player(nullptr)
 {
 	loadTextures();
@@ -25,29 +25,35 @@ World::World(sf::RenderWindow& window)
 
 void World::update(sf::Time deltaTime)
 {
-	// Move the player
-	sf::Vector2f position = m_player->getPosition();
-	sf::Vector2f velocity = m_player->getVelocity();
+	// Reset player velocity
+	m_player->setVelocity(0.f, 0.f);
 
-	// If player touches borders, flip its X velocity
-	if (position.x <= m_worldBounds.left + 150.f
-		|| position.x >= m_worldBounds.left + m_worldBounds.width - 150.f)
+	// Forward commands to scene graph, adapt velocity
+	while (!m_commandQueue.isEmpty())
 	{
-		velocity.x = -velocity.x;
-		m_player->setVelocity(velocity);
+		m_sceneGraph.onCommand(m_commandQueue.pop(), deltaTime);
 	}
+	adaptPlayerVelocity();
 
-	// Scroll the world
-	m_worldView.move(velocity.x * deltaTime.asSeconds(), 0.f);
+	auto oldPosition = m_player->getPosition();
 
 	// Apply movements
 	m_sceneGraph.update(deltaTime);
+	adaptPlayerPosition();
+
+	// Move the world view
+	m_worldView.move((m_player->getPosition() - oldPosition));
 }
 
 void World::draw()
 {
 	m_window.setView(m_worldView);
 	m_window.draw(m_sceneGraph);
+}
+
+CommandQueue& World::getCommandQueue()
+{
+	return m_commandQueue;
 }
 
 void World::loadTextures()
@@ -78,9 +84,32 @@ void World::buildScene()
 	m_sceneLayers[Background]->attachChild(std::move(backgroundSprite));
 
 	// Add player
-	std::unique_ptr<Player> leader(new Player(Player::Type::BibleThumpReverse, m_textures));
+	std::unique_ptr<PlayerEntity> leader(new PlayerEntity(PlayerEntity::Type::BibleThumpReverse, m_textures));
 	m_player = leader.get();
 	m_player->setPosition(m_spawnPosition);
-	m_player->setVelocity(100.f, 0.f);
 	m_sceneLayers[Ground]->attachChild(std::move(leader));
+}
+
+void World::adaptPlayerPosition() const
+{
+	// Keep player's position inside the screen bounds, at least borderDistance units from the border
+	const float borderDistance = 150.f;
+
+	sf::Vector2f position = m_player->getPosition();
+	position.x = std::max(position.x, 0 + borderDistance);
+	position.x = std::min(position.x, m_worldBounds.width- borderDistance);
+	position.y = std::max(position.y, 0 + borderDistance);
+	position.y = std::min(position.y, m_worldBounds.height - borderDistance);
+	m_player->setPosition(position);
+}
+
+void World::adaptPlayerVelocity() const
+{
+	sf::Vector2f velocity = m_player->getVelocity();
+
+	// If moving diagonally, reduce velocity (to have always same velocity)
+	if (velocity.x != 0.f && velocity.y != 0.f)
+	{
+		m_player->setVelocity(velocity / std::sqrt(2.f));
+	}
 }

@@ -6,7 +6,7 @@
 #include "Entity.hpp"
 
 
-class Player : public Entity
+class PlayerEntity : public Entity
 {
 public:
 	enum class Type
@@ -15,10 +15,12 @@ public:
 	};
 
 public:
-					Player(Type type, const TextureHolder& textures);
+							PlayerEntity(Type type, const TextureHolder& textures);
+
+	virtual unsigned int	getCategory() const;
 
 private:
-	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
+	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
 	Type			m_type;

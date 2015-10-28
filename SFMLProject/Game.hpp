@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/Window/Keyboard.hpp>
 
+#include "Input/PlayerInput.hpp"
 #include "World.hpp"
 
 
@@ -14,11 +14,10 @@ public:
 	void	run();
 
 private:
-	void	processEvents();
+	void	processInput();
 	void	update(sf::Time deltaTime);
 	void	render();
 
-	void	handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 	void	updateStatistics(sf::Time elapsedTime);
 
 private:
@@ -26,6 +25,7 @@ private:
 
 	sf::RenderWindow		m_window;
 	World					m_world;
+	PlayerInput				m_player;
 
 	sf::Font				m_font;
 	sf::Text				m_statisticsText;
