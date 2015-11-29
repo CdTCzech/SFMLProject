@@ -15,12 +15,12 @@ public:
 	};
 
 public:
-							PlayerEntity(Type type, const TextureHolder& textures);
+					PlayerEntity(Type type, const TextureHolder& textures);
 
-	virtual unsigned int	getCategory() const;
+	unsigned int	getCategory() const override;
 
 private:
-	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
 	Type			m_type;

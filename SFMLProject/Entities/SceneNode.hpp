@@ -17,7 +17,7 @@ public:
 	typedef std::unique_ptr<SceneNode> SceneNodePtr;
 
 public:
-	SceneNode();
+							SceneNode();
 
 	void					attachChild(SceneNodePtr child);
 	SceneNodePtr			detachChild(const SceneNode& node);
@@ -35,7 +35,7 @@ private:
 	virtual void	updateCurrent(sf::Time deltaTime);
 	void			updateChildren(sf::Time deltaTime);
 
-	virtual void	draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
+	void			draw(sf::RenderTarget& target, sf::RenderStates states) const override final;
 	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 	void			drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 

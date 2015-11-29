@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Text.hpp>
 
 #include "Input/PlayerInput.hpp"
+#include "States/StateStack.hpp"
 #include "World.hpp"
 
 
@@ -19,15 +20,18 @@ private:
 	void	render();
 
 	void	updateStatistics(sf::Time elapsedTime);
+	void	registerStates();
 
 private:
 	static const sf::Time	TimePerFrame;
 
 	sf::RenderWindow		m_window;
-	World					m_world;
+	TextureHolder			m_textures;
+	FontHolder				m_fonts;
 	PlayerInput				m_player;
 
-	sf::Font				m_font;
+	StateStack				m_stateStack;
+
 	sf::Text				m_statisticsText;
 	sf::Time				m_statisticsUpdateTime;
 	std::size_t				m_statisticsNumFrames;

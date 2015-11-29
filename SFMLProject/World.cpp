@@ -45,7 +45,7 @@ void World::update(sf::Time deltaTime)
 	m_worldView.move((m_player->getPosition() - oldPosition));
 }
 
-void World::draw()
+void World::draw() const
 {
 	m_window.setView(m_worldView);
 	m_window.draw(m_sceneGraph);

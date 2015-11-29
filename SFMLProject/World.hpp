@@ -23,7 +23,7 @@ class World : private sf::NonCopyable
 public:
 	explicit		World(sf::RenderWindow& window);
 	void			update(sf::Time deltaTime);
-	void			draw();
+	void			draw() const;
 
 	CommandQueue&	getCommandQueue();
 

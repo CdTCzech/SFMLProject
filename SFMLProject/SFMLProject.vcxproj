@@ -133,6 +133,15 @@
     <ClCompile Include="Input\CommandQueue.cpp" />
     <ClCompile Include="Input\PlayerInput.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="States\GameState.cpp" />
+    <ClCompile Include="States\LoadingState.cpp" />
+    <ClCompile Include="States\MenuState.cpp" />
+    <ClCompile Include="States\PauseState.cpp" />
+    <ClCompile Include="States\State.cpp" />
+    <ClCompile Include="States\StateStack.cpp" />
+    <ClCompile Include="States\TitleState.cpp" />
+    <ClCompile Include="Utilities\ParallelTask.cpp" />
+    <ClCompile Include="Utilities\Utility.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,8 +154,18 @@
     <ClInclude Include="Input\Command.hpp" />
     <ClInclude Include="Input\CommandQueue.hpp" />
     <ClInclude Include="Input\PlayerInput.hpp" />
+    <ClInclude Include="States\GameState.hpp" />
+    <ClInclude Include="States\LoadingState.hpp" />
+    <ClInclude Include="States\MenuState.hpp" />
+    <ClInclude Include="States\PauseState.hpp" />
+    <ClInclude Include="States\State.hpp" />
+    <ClInclude Include="States\StateIdentifiers.hpp" />
+    <ClInclude Include="States\StateStack.hpp" />
+    <ClInclude Include="States\TitleState.hpp" />
+    <ClInclude Include="Utilities\ParallelTask.hpp" />
     <ClInclude Include="Utilities\ResourceHolder.hpp" />
     <ClInclude Include="Utilities\ResourceIdentifiers.hpp" />
+    <ClInclude Include="Utilities\Utility.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

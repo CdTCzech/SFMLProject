@@ -5,6 +5,7 @@
 
 #include "../Input/Category.hpp"
 #include "../Utilities/ResourceHolder.hpp"
+#include "../Utilities/Utility.hpp"
 
 
 Textures::ID toTextureID(PlayerEntity::Type type)
@@ -12,7 +13,7 @@ Textures::ID toTextureID(PlayerEntity::Type type)
 	switch (type)
 	{
 	case PlayerEntity::Type::BibleThumpReverse:
-		return Textures::ID::BibleThumpReverse;;
+		return Textures::ID::BibleThumpReverse;
 	}
 	return Textures::ID::BibleThumpReverse;
 }
@@ -21,8 +22,7 @@ PlayerEntity::PlayerEntity(Type type, const TextureHolder& textures)
 	: m_type(type)
 	, m_sprite(textures.get(toTextureID(type)))
 {
-	sf::FloatRect bounds = m_sprite.getLocalBounds();
-	m_sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	centerOrigin(m_sprite);
 }
 
 unsigned int PlayerEntity::getCategory() const
